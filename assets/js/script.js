@@ -60,6 +60,16 @@ function generatePassword() {
     return generatePassword();
   }
   console.log(finalCharacters);
+
+   // Using the user's desired characters, looping through finalCharacter array (based on desired password length)
+   var finalPassword = [];
+   for (let i = 0; i < passwordLength; i++) { 
+     // Randomizing the finalCharacter array and pushing each random character into the final password variable 
+     x = Math.floor(Math.random() * finalCharacters.length);
+     finalPassword.push(finalCharacters[x]);
+   } 
+   console.log(finalPassword);
+   return finalPassword.join("");
 }
 
 // Write password to the #password input
