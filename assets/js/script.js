@@ -5,52 +5,61 @@ var generateBtn = document.querySelector("#generate");
 
 // Array for special characters
 var symbols = ["!", "@", ".", "%", "#", "&", "$", "_", "'", ";", "-", " ", "(", ")", "^", "*", "+", ":", "<", ">", "=", "/", "?", "[", "]", "`", "~", "|"];
-console.log(symbols.length);
 
 // Array for numbers
 var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-console.log(numbers.length);
 
+// Array for letters, which is then split into uppercase & lowercase arrays
 var letters = 'abcdefghijklmnopqrstuvwxyz';
-console.log(letters);
-
 var lettersArr = letters.split('');
 console.log(lettersArr);
-
 var upperLettersArr = letters.toUpperCase().split('');
 console.log(upperLettersArr);
 
+// Array to store final characters (based on the user's selections)
+var finalCharacters = [];
+
 function generatePassword() {
-  var length = prompt("How many characters would you like your password to contain?");
+  var passwordLength = prompt("How many characters would you like your password to contain?");
   console.log(length);
-  if (length < 8) {
+  if (passwordLength < 8) {
     alert("Password length must be at least 8 characters!");
     return generatePassword();
   }
-  if (length > 128) {
+  if (passwordLength > 128) {
     alert("Password length can be a maximum of 128 characters!");
     return generatePassword();
   }
-  var finalCharacters = []
-  // If the user selected Okay for that specific character, you are going to push it into the finalCharacter array
-
+  // If the user selected "Okay" for that specific character, push it into the finalCharacter array
   var special = confirm("Click OK to confirm including special characters.");
-// if special === true push the special array of character into the final character array
-
+  if (special === true) {
+    for (let i=0; i<symbols.length; i++){
+      finalCharacters.push(symbols[i]);
+  }
+  }
   var numeric = confirm("Click OK to confirm including numeric characters.");
+  if (numeric === true) {
+    for (let i=0; i<numbers.length; i++){
+      finalCharacters.push(numbers[i]);
+  }
+  }
   var uppercase = confirm("Click OK to confirm including uppercase characters.");
+  if (uppercase === true) {
+    for (let i=0; i<upperLettersArr.length; i++){
+      finalCharacters.push(upperLettersArr[i]);
+  }
+}
   var lowercase = confirm("Click OK to confirm including lowercase characters.");
+  if (lowercase === true) {
+    for (let i=0; i<lettersArr.length; i++){
+      finalCharacters.push(lettersArr[i]);
+  }
+}
   if (special === false && numeric === false && uppercase === false && lowercase === false){
-    alert('Please select at least one option')
+    alert("Please select at least one option")
+    return generatePassword();
   }
-
-  // ONce you get all of the users desired characters
-  // You are going to loop through that final character array, and we are looping based on the length the user decided on
-var finalPassword = ''
-  for (let i = 0; i < length; i++) { 
-    // We going to use math.random to randomize the finalCharacter array and push each random character into the final password variable 
-  }
-  return finalPassword;
+  console.log(finalCharacters);
 }
 
 // Write password to the #password input
